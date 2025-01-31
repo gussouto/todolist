@@ -8,47 +8,63 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
 @Controller
+@RequestMapping("/tasks")
 public class TaskController {
 
-    @Autowired
-    private TaskService service;
+    private static final String REDIRECT_TASK = "redirect:/tasks";
+//    private final TaskService taskService;
+
 
     @Autowired
-    private TaskRepository taskRepository;
+    private TaskService taskService;
 
-    @GetMapping("/registerTask")
-    public ModelAndView register(TaskEntity task) {
-        ModelAndView mv = new ModelAndView("admin/task/register");
+    // Página para mostrar todas as tarefas
+    @GetMapping("/listTasks")
+    public ModelAndView listTasks() {
+        ModelAndView mv = new ModelAndView("tasks");
+        mv.addObject("tasks", taskService.getAllTasks());
+        return mv;
+    }
+
+    // Página para criar uma nova tarefas
+    @GetMapping("/create")
+    public ModelAndView showCreateTaskForm() {
+        ModelAndView mv = new ModelAndView("create_task");
+        mv.addObject("task", new TaskEntity());
+        return mv;
+    }
+
+    // Metodo para processar o formulário de criação de uma nova tarefa
+    @PostMapping("/create")
+    public ModelAndView createTask(@ModelAttribute TaskEntity task) {
+        taskService.saveTask(task);
+        return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
+    }
+
+    //Página para editar uma tarefa existente
+    @GetMapping("/edit/{id}")
+    public ModelAndView showEditForm(@PathVariable Long id) {
+        TaskEntity task = taskService.getTaskById(id);
+        ModelAndView mv = new ModelAndView("edit_task");
         mv.addObject("task", task);
         return mv;
     }
 
-    @GetMapping("/allTasks")
-    public List<TaskEntity> getAllTasks() {
-        return service.getAllTasks();
+    // Metodo para processar a atualização da tarefa
+    @PostMapping("/edit/{id}")
+    public ModelAndView editTask(@PathVariable Long id, @ModelAttribute TaskEntity task) {
+        taskService.saveTask(task);
+        return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
     }
 
-    @GetMapping("/getTaskById/{id}")
-    public TaskEntity getTaskById(@PathVariable("id") Long id) {
-        return service.getTaskById(id);
-    }
-
-    @PostMapping("/saveTask")
-    public TaskEntity saveTask(@RequestBody TaskEntity task) {
-        return service.saveTask(task);
-    }
-
-    @GetMapping("/editTask/{id}")
-    public ModelAndView edit(@PathVariable("id") Long id) {
-        return register(taskRepository.getReferenceById(id));
-    }
-
-    @DeleteMapping("/deleteTask/{id}")
-    public void deleteTask(@PathVariable("id") Long id) {
-        service.deleteTask(id);
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteTask(@PathVariable Long id) {
+        taskService.deleteTask(id);
+        return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
     }
 
 }
+
+

@@ -22,8 +22,10 @@ public class TaskEntity implements Serializable {
 
     @Column (nullable = false)
     private String task;
+
     private String description;
     private Date date;
-
+    private boolean completed;
 
 }
+
