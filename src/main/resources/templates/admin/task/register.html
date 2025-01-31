@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+
+<form action="/saveTask" method="POST" th:object="${task}">
+
+    <label>Task</label>
+    <input type="text" th:field="*{task}"/>
+
+    <label>Description</label>
+    <input type="text" th:field="*{description}"/>
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <button type="submit">Save</button>
+
+</form>
+
+</body>
+</html>
+
