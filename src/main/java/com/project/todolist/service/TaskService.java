@@ -1,12 +1,12 @@
 package com.project.todolist.service;
 
-import com.project.todolist.model.TaskEntity;
+import com.project.todolist.dto.TaskDTO;
+import com.project.todolist.entity.TaskEntity;
 import com.project.todolist.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,8 +23,9 @@ public class TaskService {
         return taskRepository.findById(id).orElseThrow(() -> new RuntimeException("The Task doesn't exist!"));
     }
 
-    public TaskEntity saveTask(TaskEntity task) {
-        return taskRepository.save(task);
+    public TaskEntity saveTask(TaskDTO taskDTO) {
+        return taskRepository.save(new TaskEntity(taskDTO.getTask(), taskDTO.getDescription(),
+                taskDTO.getDate(), taskDTO.isCompleted()));
     }
 
     public LocalDate date() {

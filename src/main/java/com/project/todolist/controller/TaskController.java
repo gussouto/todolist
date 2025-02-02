@@ -1,11 +1,15 @@
 package com.project.todolist.controller;
 
-import com.project.todolist.model.TaskEntity;
-import com.project.todolist.repository.TaskRepository;
+import com.project.todolist.dto.TaskDTO;
+import com.project.todolist.entity.TaskEntity;
 import com.project.todolist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -13,8 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private static final String REDIRECT_TASK = "redirect:/tasks";
-//    private final TaskService taskService;
+    private static final String REDIRECT_TASK = "redirect:/admin";
 
 
     @Autowired
@@ -38,9 +41,9 @@ public class TaskController {
 
     // Metodo para processar o formulário de criação de uma nova tarefa
     @PostMapping("/create")
-    public ModelAndView createTask(@ModelAttribute TaskEntity task) {
+    public ModelAndView createTask(@ModelAttribute("task") TaskDTO task) {
         taskService.saveTask(task);
-        return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
+        return new ModelAndView("create_task"); // Redirecionando para lista de tarefas
     }
 
     //Página para editar uma tarefa existente
@@ -54,7 +57,7 @@ public class TaskController {
 
     // Metodo para processar a atualização da tarefa
     @PostMapping("/edit/{id}")
-    public ModelAndView editTask(@PathVariable Long id, @ModelAttribute TaskEntity task) {
+    public ModelAndView editTask(@PathVariable Long id, @ModelAttribute("task") TaskDTO task) {
         taskService.saveTask(task);
         return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
     }

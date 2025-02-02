@@ -15,66 +15,48 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <img src="https://w7.pngwing.com/pngs/426/341/png-transparent-shopping-cart-e-commerce-online-shopping-logo-shopping-cart-blue-service-logo-thumbnail.png"
-         width="30" height="30" alt="" style="margin-left: 15px;">
-    <a class="navbar-brand" href="/admin">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado"
-            aria-expanded="false" aria-label="Alterna navegação">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(página
-                                                        atual)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar"
-                   aria-label="Pesquisar">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-        </form>
-    </div>
-</nav>
-
 
 <div class="container">
 
     <table class="table">
-        <thead>
-        <tr>ID</tr>
-        <tr>Name</tr>
-        <tr>Abbreviation</tr>
-        <tr>Action</tr>
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Task</th>
+            <th scope="col">Description</th>
+            <th scope="col">Completed</th>
+        </tr>
         </thead>
 
-        <tbody th:each="state: ${listStates}">
-        <tr>
-            <td th:text="${state.id}"></td>
-            <td th:text="${state.name}"></td>
-            <td th:text="${state.abbreviation}"></td>
-            <td colspan="2">
-                <a th:href="@{/editState/{id}(id=${state.id})}"><i class="fa-duotone fa-solid fa-pen-to-square"
-                                                                   style="--fa-primary-color: #27519b; --fa-secondary-color: #27519b;"></i></a>
-                <a th:href="@{/removeState/{id}(id=${state.id})}"><i class="fa-solid fa-trash-can"
-                                                                     style="color: #c01616;"></i></a>
-            </td>
-        </tr>
+        <tbody>
+            <tr th:if = "${listTasks.empty}">
+                <td colspan="3">There's no Tasks.</td>
+            </tr>
+
+            <tr th:each="task:${listTasks}">
+                <td><span th:text="${task.id}"></span></td>
+                <td> <span th:text="${task.date}"></span></td>
+                <td> <span th:text="${task.task}"></span></td>
+                <td> <span th:text="${task.description}"></span></td>
+                <td> <span th:text="${task.completed}"></span></td>
+                <td colspan="2">
+                    <a th:href="@{/editState/{id}(id=${state.id})}"><i class="fa-duotone fa-solid fa-pen-to-square"
+                                                                       style="--fa-primary-color: #27519b; --fa-secondary-color: #27519b;"></i></a>
+                    <a th:href="@{/removeState/{id}(id=${state.id})}"><i class="fa-solid fa-trash-can"
+                                                                         style="color: #c01616;"></i></a>
+                </td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="/tasks" class="btn btn-danger">Back</a>
+    <a href="/tasks/listTasks" class="btn btn-danger">Back</a>
 
 
 </div>
 
 <footer class="container card-footer text-muted">
+    <br>
     <p>@Developed in 2025, by Gustavo Souto</p>
 </footer>
 
@@ -90,5 +72,3 @@
 </body>
 
 </html>
-
-

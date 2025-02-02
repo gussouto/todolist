@@ -13,29 +13,31 @@
 
         <h1>Create New Task</h1>
 
-        <form action="/create" method="POST">
+        <form action="/tasks/create" method="POST">
             <div class="form-group">
 
                 <label for="task">Task:</label>
-                <input type="text" id="task" class="form-control" required>
+                <input type="text" id="task" class="form-control" name="task" required>
                 <br>
 
                 <label for="description">Description:</label>
-                <input type="text" id="description" class="form-control" required>
+                <input type="text" id="description" class="form-control" name="description" required>
                 <br>
 
-                <label for="description">Date:</label>
-                <input type="date" id="date" class="form-control" required>
+                <label for="date">Date:</label>
+                <input type="date" id="date" class="form-control" name="date"  required>
                 <br>
 
                 <label for="completed">Completed:</label>
-                <input type="checkbox" id="completed"  >
+                <input type="checkbox" id="completed" name="completed"  >
                 <br>
+
+                <button type="submit" class="btn btn-success">Save</button>
+
             </div>
 
         </form>
 
-        <button type="submit" class="btn btn-success">Save</button>
         <a href="/tasks" class="btn btn-danger">Back</a>
     </div>
 
