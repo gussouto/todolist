@@ -75,7 +75,7 @@
 					<source>17</source>
 					<target>17</target>
 					<compilerArgs>
-						<arg>-Amapstruct.defaultComponentModel=spring</arg>
+<!--						<arg>-Amapstruct.defaultComponentModel=spring</arg>-->
 					</compilerArgs>
 				</configuration>
 			</plugin>

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/tasks")
@@ -24,12 +26,20 @@ public class TaskController {
     private TaskService taskService;
 
     // Página para mostrar todas as tarefas
-    @GetMapping("/listTasks")
+    @GetMapping("/listTask")
     public ModelAndView listTasks() {
-        ModelAndView mv = new ModelAndView("tasks");
-        mv.addObject("tasks", taskService.getAllTasks());
+        ModelAndView mv = new ModelAndView("list_task");
+        mv.addObject("listTasks", taskService.getAllTasks());
         return mv;
     }
+
+/*    @GetMapping("/listTask")
+    public ModelAndView listTasks() {
+        List<TaskEntity> tasks = taskService.getAllTasks();
+        ModelAndView mv = new ModelAndView("list_task");
+        mv.addObject("listTasks", tasks);
+        return mv;
+    }*/
 
     // Página para criar uma nova tarefas
     @GetMapping("/create")
@@ -49,9 +59,8 @@ public class TaskController {
     //Página para editar uma tarefa existente
     @GetMapping("/edit/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
-        TaskEntity task = taskService.getTaskById(id);
         ModelAndView mv = new ModelAndView("edit_task");
-        mv.addObject("task", task);
+        mv.addObject("editTask", taskService.getTaskById(id));
         return mv;
     }
 

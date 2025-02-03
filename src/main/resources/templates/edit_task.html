@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,30 +15,32 @@
 
         <h1>Edit Task</h1>
 
-        <form action="/edit/{id}" method="POST">
-            <div class="form-group">
+            <form action="/tasks/edit/{id}" method="POST" th:object="${editTask}">
+                <div class="form-group">
 
-                <label for="task">Task:</label>
-                <input type="text" id="task" class="form-control" required>
-                <br>
+                    <label for="task">Task:</label>
+                    <input type="text" id="task" class="form-control" name="task" th:field="*{task}" required>
+                    <br>
 
-                <label for="description">Description:</label>
-                <input type="text" id="description" class="form-control" required>
-                <br>
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" class="form-control" name="description" th:field="*{description}" required>
+                    <br>
 
-                <label for="description">Date:</label>
-                <input type="date" id="date" class="form-control" required>
-                <br>
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" class="form-control" name="date" th:field="*{date}" required>
+                    <br>
 
-                <label for="completed">Completed:</label>
-                <input type="checkbox" id="completed"  >
-                <br>
-            </div>
+                    <label for="completed">Completed:</label>
+                    <input type="checkbox" id="completed" name="completed" th:field="*{completed}" >
+                    <br>
 
-        </form>
+                    <button type="submit" class="btn btn-success">Save Edition</button>
 
-        <button type="submit" class="btn btn-success">Save Edition</button>
-        <a href="/tasks" class="btn btn-danger">Back</a>
+                </div>
+
+            </form>
+
+        <a href="/tasks/listTask" class="btn btn-danger">Back</a>
     </div>
 
     <footer class="container-fluid text-muted">
