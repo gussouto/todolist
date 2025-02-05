@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private static final String REDIRECT_TASK = "redirect:/admin";
+    private static final String REDIRECT_TASK = "redirect:/tasks/listTask";
 
 
     @Autowired
@@ -53,7 +53,7 @@ public class TaskController {
     @PostMapping("/create")
     public ModelAndView createTask(@ModelAttribute("task") TaskDTO task) {
         taskService.saveTask(task);
-        return new ModelAndView("create_task"); // Redirecionando para lista de tarefas
+        return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
     }
 
     //Página para editar uma tarefa existente
