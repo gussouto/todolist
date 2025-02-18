@@ -41,7 +41,7 @@
                 <td> <span th:text="${task.description}"></span></td>
                 <td> <span th:text="${task.completed} ? 'Yes' : 'No'"></span></td>
                 <td colspan="2">
-                    <a th:href="@{/tasks/edit/{id}(id=${task.id})}"><i class="fa-duotone fa-solid fa-pen-to-square"
+                    <a th:href="@{/tasks/{id}/edit(id=${task.id})}"><i class="fa-duotone fa-solid fa-pen-to-square"
                                                                        style="--fa-primary-color: #27519b; --fa-secondary-color: #27519b;"></i></a>
                     <a th:href="@{/tasks/delete/{id}(id=${task.id})}"><i class="fa-solid fa-trash-can"
                                                                          style="color: #c01616;"></i></a>

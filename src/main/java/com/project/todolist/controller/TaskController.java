@@ -2,17 +2,13 @@ package com.project.todolist.controller;
 
 import com.project.todolist.dto.TaskDTO;
 import com.project.todolist.entity.TaskEntity;
+import com.project.todolist.repository.TaskRepository;
 import com.project.todolist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 
 @Controller
@@ -25,6 +21,9 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     // Página para mostrar todas as tarefas
     @GetMapping("/listTask")
     public ModelAndView listTasks() {
@@ -32,14 +31,6 @@ public class TaskController {
         mv.addObject("listTasks", taskService.getAllTasks());
         return mv;
     }
-
-/*    @GetMapping("/listTask")
-    public ModelAndView listTasks() {
-        List<TaskEntity> tasks = taskService.getAllTasks();
-        ModelAndView mv = new ModelAndView("list_task");
-        mv.addObject("listTasks", tasks);
-        return mv;
-    }*/
 
     // Página para criar uma nova tarefas
     @GetMapping("/create")
@@ -51,28 +42,40 @@ public class TaskController {
 
     // Metodo para processar o formulário de criação de uma nova tarefa
     @PostMapping("/create")
-    public ModelAndView createTask(@ModelAttribute("task") TaskDTO task) {
-        taskService.saveTask(task);
+    public ModelAndView createTask(@ModelAttribute("task") TaskDTO taskDTO) {
+        taskService.saveTask(taskDTO);
         return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
     }
 
-    //Página para editar uma tarefa existente
-    @GetMapping("/edit/{id}")
-    public ModelAndView showEditForm(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("edit_task");
-        mv.addObject("editTask", taskService.getTaskById(id));
+    // Form para mostrar a tarefa selecionada pelo id
+    @GetMapping("/{id}/edit")
+    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("task", taskService.getTaskById(id));
+        return "update_task";
+    }
+
+/*
+    Outra maneira de se mostrar o Form da task escolhida. (Mantido no código apenas para fins educativos)
+    @GetMapping("/{id}/edit")
+    public ModelAndView showUpdateForm(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("update_task");
+        mv.addObject("task", taskService.getTaskById(id));
         return mv;
     }
+*/
 
-    // Metodo para processar a atualização da tarefa
-    @PostMapping("/edit/{id}")
-    public ModelAndView editTask(@PathVariable Long id, @ModelAttribute("task") TaskDTO task) {
-        taskService.saveTask(task);
-        return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
+    // Metodo para editar tarefa da lista
+        // Usar RequestBody para requisições POST via JSON
+        // Usar ModelAttribute quando estiver trabalhando com Thymeleaf e formulários HTML
+    @PostMapping("/{id}")
+    public String updateTask(@PathVariable("id") Long id, @ModelAttribute("task") TaskDTO taskDTO) {
+        taskService.updateTask(id, taskDTO);
+        return REDIRECT_TASK;
     }
 
+    // Metodo para deletar tarefa da lista
     @GetMapping("/delete/{id}")
-    public ModelAndView deleteTask(@PathVariable Long id) {
+    public ModelAndView deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTask(id);
         return new ModelAndView(REDIRECT_TASK); // Redirecionando para lista de tarefas
     }

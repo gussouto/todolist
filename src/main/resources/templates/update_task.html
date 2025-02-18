@@ -15,23 +15,27 @@
 
         <h1>Edit Task</h1>
 
-            <form action="/tasks/edit/{id}" method="POST" th:object="${editTask}">
+            <form th:action="@{/tasks/{id}(id=${task.id})}" method="POST" th:object="${task}">
                 <div class="form-group">
 
+                    <label for="id">Id:</label>
+                    <input type="text" id="id" class="form-control" th:field="*{id}" readonly="readonly">
+                    <br>
+
                     <label for="task">Task:</label>
-                    <input type="text" id="task" class="form-control" name="task" th:field="*{task}" required>
+                    <input type="text" id="task" class="form-control" th:field="*{task}" required>
                     <br>
 
                     <label for="description">Description:</label>
-                    <input type="text" id="description" class="form-control" name="description" th:field="*{description}" required>
+                    <input type="text" id="description" class="form-control" th:field="*{description}" required>
                     <br>
 
                     <label for="date">Date:</label>
-                    <input type="date" id="date" class="form-control" name="date" th:field="*{date}" required>
+                    <input type="date" id="date" class="form-control" th:field="*{date}" required>
                     <br>
 
                     <label for="completed">Completed:</label>
-                    <input type="checkbox" id="completed" name="completed" th:field="*{completed}" >
+                    <input type="checkbox" id="completed" th:field="*{completed}" >
                     <br>
 
                     <button type="submit" class="btn btn-success">Save Edition</button>
