@@ -49,20 +49,22 @@ public class TaskController {
 
     // Form para mostrar a tarefa selecionada pelo id
     @GetMapping("/{id}/edit")
-    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("task", taskService.getTaskById(id));
-        return "update_task";
-    }
-
-/*
-    Outra maneira de se mostrar o Form da task escolhida. (Mantido no código apenas para fins educativos)
-    @GetMapping("/{id}/edit")
     public ModelAndView showUpdateForm(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("update_task");
         mv.addObject("task", taskService.getTaskById(id));
         return mv;
     }
+
+/*
+    Outra maneira de se mostrar o Form da task escolhida. (Mantido no código apenas para fins educativos)
+
+    @GetMapping("/{id}/edit")
+    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("task", taskService.getTaskById(id));
+        return "update_task";
+    }
 */
+
 
     // Metodo para editar tarefa da lista
         // Usar RequestBody para requisições POST via JSON
