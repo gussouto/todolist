@@ -1,0 +1,110 @@
+:root {
+    --color-background: #edede9;
+    --color-primary: #2c3e50;
+    --color-secundary: #7f8c8d;
+    --color-primary-button: #D6CCC2;
+    --color-primary-button-hover: #E3D5CA;
+    --color-secundary-button: #F5EBE0;
+    --color-secundary-button-hover: #D5BDAF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    color: var(--color-secundary);
+}
+
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 30px;
+    color: var(--color-primary);
+}
+
+.form-group {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--color-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+label {
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    display: block;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-secundary-button-hover);
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button[type="submit"] {
+    background-color: var(--color-secundary);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #ffaa79;
+}
+
+a.btn-danger {
+    display: inline-block;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #dc3545;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+a.btn-danger:hover {
+    background-color: #66000a;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    color: var(--color-secundary);
+    font-size: 1rem;
+}
+
+footer p {
+    margin: 0;
+}

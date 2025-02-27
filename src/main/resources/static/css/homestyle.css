@@ -1,0 +1,188 @@
+:root {
+    --color-background: #edede9;
+    --color-primary: #2c3e50;
+    --color-secundary: #7f8c8d;
+    --color-primary-button: #D6CCC2;
+    --color-primary-button-hover: #E3D5CA;
+    --color-secundary-button: #F5EBE0;
+    --color-secundary-button-hover: #D5BDAF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    text-align: center;
+    background-color: var(--color-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 80%;
+    max-width: 550px;     
+    z-index: 1;
+}
+
+.welcome-message h1 {
+    color: var(--color-primary);
+    font-size: 36px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(30) 0.2s 1 normal both ;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.welcome-message p {
+    color: var(--color-secundary);
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.buttons .btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--color-primary-button);
+    color: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-button-hover);
+}
+
+.btn-secondary {
+    background-color: var(--color-secundary-button);
+    color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secundary-button-hover);
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: var(--color-secundary);
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Objetos animados */
+.floating-checkbox,
+.floating-checkbox2,
+.floating-checkbox3 {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid var(--color-secundary);
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: var(--color-secundary);
+    animation: float 10s infinite ease-in-out;
+}
+
+.floating-checkbox {
+    top: 20%;
+    left: 10%;
+    animation-duration: 12s;
+    animation-delay: 0s;
+}
+
+.floating-checkbox2 {
+    top: 30%;
+    right: 15%;
+    animation-duration: 14s;
+    animation-delay: 0.3s;
+}
+
+.floating-checkbox3 {
+    bottom: 10%;
+    left: 35%;
+    animation-duration: 16s;
+    animation-delay: 0.6s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(100px, -100px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+/* Para telas menores que 768px */
+@media (max-width: 768px)  {
+    .welcome-message h1 {
+        font-size: 28px;
+        animation: typing 3s steps(25) 1s 1 normal both;
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 570px;
+    }
+}
+
+/* Para telas menores que 500px */
+@media (max-width: 500px) {
+    .welcome-message h1 {
+        font-size: 22px;
+        animation: typing 3s steps(20) 0.2s 1 normal both;
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 335px;
+    }
+
+    .buttons .btn {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
